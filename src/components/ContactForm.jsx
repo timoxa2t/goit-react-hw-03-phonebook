@@ -17,8 +17,9 @@ export default function ContactForm({addContact}){
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        addContact({name, number}) 
-            .then(clearForm)
+        if(addContact({name, number})){ 
+            clearForm()
+        }
     }
 
     const clearForm = () => {

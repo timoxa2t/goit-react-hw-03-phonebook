@@ -25,12 +25,6 @@ const getSavedContacts = () => {
 
 export class App extends Component {
 
-  constructor(){
-    super()
-    this.addContact = this.addContact.bind(this)
-    this.removeContact = this.removeContact.bind(this)
-    this.handleFilterChange = this.handleFilterChange.bind(this)
-  }
 
   state = {
     contacts: getSavedContacts(),
@@ -46,14 +40,14 @@ export class App extends Component {
     const {contacts} = this.state
     if(contacts.find(item => item.name === name)){
       alert(name + " is already in contacts")
-      return Promise.reject()
+      return false
     }
     const newContacts = [...contacts]
     newContacts.push({name, number, id: nanoid()})
     this.setState({
       contacts: newContacts
     })
-    return Promise.resolve()
+    return true
   }
 
 
@@ -66,9 +60,7 @@ export class App extends Component {
 
   removeContact = (id) => {
     const {contacts} = this.state
-    const removeIndex = contacts.findIndex(item => item.id === id)
-    if(removeIndex < 0) return
-    const newContacts = [...contacts.slice(0, removeIndex), ...contacts.slice(removeIndex + 1, contacts.length)]
+    const newContacts = contacts.filter(item => item.id !== id)
     this.setState({
       contacts: newContacts
     })
