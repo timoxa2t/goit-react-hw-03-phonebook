@@ -1,13 +1,17 @@
 import PropTypes from 'prop-types'
+import { Component } from 'react'
 
-export default function Section({title, children}){
+export default class Section extends Component{
 
-    return (
-        <section>
-            <h2>{title}</h2>
-            {children}
-        </section>
-    )
+    render(){
+        const {title, children} = this.props
+        return (
+            <section>
+                <h2>{title}</h2>
+                {children}
+            </section>
+        )
+    }
 }
 
 
